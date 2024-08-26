@@ -25,17 +25,6 @@ public class App {
                     "jdbc:mysql://localhost:3306/your_db", "root", "sdb162sw"
             );
 
-            ProductTypeDAO productTypeDAO = new ProductTypeDAO(connection);
-
-            productTypeDAO.getAll().forEach(System.out::println);
-            productTypeDAO.upsert(new ProductType(0, "Teste"));
-            productTypeDAO.getAll().forEach(System.out::println);
-            productTypeDAO.upsert(new ProductType(4, "Teste 2"));
-            productTypeDAO.getAll().forEach(System.out::println);
-            System.out.println(productTypeDAO.getById(1));
-            productTypeDAO.delete(5);
-            productTypeDAO.getAll().forEach(System.out::println);
-
             servidor.setExecutor(null);
             servidor.start();
             System.out.println("Servidor rodando na porta 8080");
