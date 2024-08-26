@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.unimater</groupId>
-  <artifactId>exemplo-com-mave</artifactId>
+  <artifactId>crud</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>exemplo-com-mave</name>

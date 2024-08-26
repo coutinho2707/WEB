@@ -1,16 +1,45 @@
 package com.unimater.model;
 
-public class SaleItem {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class SaleItem implements Entity {
     private int id;
     private Product product;
     private int quantity;
     private double percentualDiscount;
+
+    public SaleItem(ResultSet rs) throws SQLException {
+        super();
+        this.id = rs.getInt("id");
+        this.quantity = rs.getInt("quantity");
+        this.percentualDiscount = rs.getDouble("percentual_discount");
+    }
+
 
     public SaleItem(int id, Product product, int quantity, double percentualDiscount) {
         this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.percentualDiscount = percentualDiscount;
+    }
+
+    public SaleItem() {
+
+    }
+
+    @Override
+    public Entity constructFromResultSet(ResultSet rs) throws SQLException {
+        return new ProductType(rs);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setInt(1, getQuantity());
+        preparedStatement.setDouble(2, getPercentualDiscount());
+        return preparedStatement;
     }
 
     public int getId() {

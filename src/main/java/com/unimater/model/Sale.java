@@ -1,18 +1,40 @@
 package com.unimater.model;
 
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.Collection;
 import java.util.List;
 
-public class Sale {
+public class Sale implements Entity {
 
     private int id;
     private List<SaleItem> saleItems;
     private Timestamp insertAt;
 
+    public Sale(ResultSet rs) throws SQLException {
+        super();
+        this.id = rs.getInt("id");
+        this.insertAt = rs.getTimestamp("insert_at");
+    }
+
     public Sale(int id, List<SaleItem> saleItems, Timestamp insertAt) {
         this.id = id;
         this.saleItems = saleItems;
         this.insertAt = insertAt;
+    }
+
+    public Sale() {
+
+    }
+
+    @Override
+    public Entity constructFromResultSet(ResultSet rs) throws SQLException {
+        return new ProductType(rs);
+    }
+
+    @Override
+    public PreparedStatement prepareStatement(PreparedStatement preparedStatement) throws SQLException {
+        preparedStatement.setTimestamp(1, getInsertAt());
+        return preparedStatement;
     }
 
     public int getId() {
