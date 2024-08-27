@@ -28,7 +28,7 @@ public class Sale implements Entity {
 
     @Override
     public Entity constructFromResultSet(ResultSet rs) throws SQLException {
-        return new ProductType(rs);
+        return new Sale(rs);
     }
 
     @Override
