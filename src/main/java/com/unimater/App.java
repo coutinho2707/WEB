@@ -2,7 +2,10 @@ package com.unimater;
 
 import com.sun.net.httpserver.HttpServer;
 import com.unimater.controller.HelloWorldHandler;
+import com.unimater.dao.ProductDAO;
 import com.unimater.dao.ProductTypeDAO;
+import com.unimater.dao.SaleDAO;
+import com.unimater.dao.SaleitemDAO;
 import com.unimater.model.ProductType;
 
 import java.io.IOException;
@@ -24,10 +27,10 @@ public class App {
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/your_db", "root", "sdb162sw"
             );
+            System.out.println("Sevidor rodiando na porca 8080");
 
             servidor.setExecutor(null);
             servidor.start();
-            System.out.println("Servidor rodando na porta 8080");
         } catch (IOException e) {
             System.out.println(e);
         } catch (SQLException e) {

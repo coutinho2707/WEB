@@ -18,4 +18,12 @@ public class SaleitemDAO extends GenericDAOImpl<SaleItem> implements GenericDAO<
         super.columns = COLUMNS;
     }
 
+    @Override
+    public String toString() {
+        return "SaleitemDAO{" +
+                "connection=" + connection +
+                ", TABLE_NAME='" + TABLE_NAME + '\'' +
+                ", COLUMNS=" + COLUMNS +
+                '}';
+    }
 }

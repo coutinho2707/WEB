@@ -16,8 +16,7 @@ public class ProductType implements Entity {
         this.description = rs.getString("description");
     }
 
-    public ProductType(int id, String description) {
-        this.id = id;
+    public ProductType(String description) {
         this.description = description;
     }
 

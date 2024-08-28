@@ -18,5 +18,4 @@ public class SaleDAO extends GenericDAOImpl<Sale> implements GenericDAO<Sale> {
         super.tableName = TABLE_NAME;
         super.columns = COLUMNS;
     }
-
 }

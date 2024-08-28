@@ -10,18 +10,19 @@ import java.sql.SQLException;
 public class Product implements Entity {
 
     private int id;
-    private ProductType productType;
+    private int productType;
     private String description;
     private double value;
 
     public Product(ResultSet rs) throws SQLException {
         super();
         this.id = rs.getInt("id");
+        this.productType = rs.getInt("product_type_id");
         this.description = rs.getString("description");
         this.value = rs.getDouble("value");
     }
 
-    public Product(int id, ProductType productType, String description, double value) {
+    public Product(int id, int productType, String description, double value) {
         this.id = id;
         this.productType = productType;
         this.description = description;
@@ -39,7 +40,7 @@ public class Product implements Entity {
 
     @Override
     public PreparedStatement prepareStatement(PreparedStatement preparedStatement) throws SQLException {
-
+        preparedStatement.setInt(1, getProductType());
         preparedStatement.setString(2, getDescription());
         preparedStatement.setDouble(3, getValue());
         return preparedStatement;
@@ -54,7 +55,7 @@ public class Product implements Entity {
         return dao.getById(productTypeId);
     }
 
-    public ProductType getProductType() {
+    public int getProductType() {
         return productType;
     }
 
@@ -70,4 +71,13 @@ public class Product implements Entity {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productType=" + productType +
+                ", description='" + description + '\'' +
+                ", value=" + value +
+                '}';
+    }
 }

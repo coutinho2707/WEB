@@ -27,18 +27,18 @@ public abstract class GenericDAOImpl<T extends Entity> implements GenericDAO<T> 
 
     @Override
     public List<T> getAll() {
-        List<T> productTypes = new ArrayList<>();
+        List<T> clazz = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM " + tableName);
             while (rs.next()) {
-                T productType = (T) supplier.get().constructFromResultSet(rs);
-                productTypes.add(productType);
+                T data = (T) supplier.get().constructFromResultSet(rs);
+                clazz.add(data);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return productTypes;
+        return clazz;
     }
 
     @Override
