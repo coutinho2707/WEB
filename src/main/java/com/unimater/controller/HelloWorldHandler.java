@@ -2,6 +2,7 @@ package com.unimater.controller;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import com.unimater.dao.ProductTypeDAO;
 
 import java.io.IOException;
 import java.io.OutputStream;

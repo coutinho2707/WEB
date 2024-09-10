@@ -17,5 +17,4 @@ public class ProductTypeDAO extends GenericDAOImpl<ProductType> implements Gener
         super.tableName = TABLE_NAME;
         super.columns = COLUMNS;
     }
-
 }
