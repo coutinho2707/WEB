@@ -54,6 +54,7 @@ public abstract class GenericDAOImpl<T extends Entity> implements GenericDAO<T> 
                         + columns.stream().map(item -> "?").collect(Collectors.joining(", "))
                         +")");
                 pstmt = object.prepareStatement(pstmt);
+                System.out.println("inserido novo registro");
             } else {
                 pstmt = connection.prepareStatement("UPDATE "
                         + tableName
@@ -62,6 +63,7 @@ public abstract class GenericDAOImpl<T extends Entity> implements GenericDAO<T> 
                         + "WHERE id = ?");
                 pstmt = object.prepareStatement(pstmt);
                 pstmt.setInt(columns.size() + 1, object.getId());
+                System.out.println("Atualizado registro");
             }
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -94,6 +96,7 @@ public abstract class GenericDAOImpl<T extends Entity> implements GenericDAO<T> 
                             + " WHERE id = ?");
             pstmt.setInt(1, id);
             pstmt.executeUpdate();
+            System.out.println("registro "+id+" excluido:");
         } catch (SQLException e) {
             e.printStackTrace();
         }

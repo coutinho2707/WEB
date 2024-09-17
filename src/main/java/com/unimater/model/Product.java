@@ -10,27 +10,29 @@ import java.sql.SQLException;
 public class Product implements Entity {
 
     private int id;
-    private int productType;
+    private ProductType productType;
     private String description;
     private double value;
 
-    public Product(ResultSet rs) throws SQLException {
-        super();
-        this.id = rs.getInt("id");
-        this.productType = rs.getInt("product_type_id");
-        this.description = rs.getString("description");
-        this.value = rs.getDouble("value");
-    }
-
-    public Product(int id, int productType, String description, double value) {
+    public Product(int id, ProductType productType, String description, double value) {
         this.id = id;
         this.productType = productType;
         this.description = description;
         this.value = value;
     }
 
-    public Product() {
+    public Product(ResultSet resultSet) throws SQLException{
+        this.id = resultSet.getInt("id");
+        this.description = resultSet.getString("description");
+        this.value = resultSet.getDouble("value");
+        this.productType = new ProductType(resultSet.getInt("product_type_id"));
+    }
 
+    public Product() {
+    }
+
+    public Product(int id) {
+        this.id = id;
     }
 
     @Override
@@ -40,7 +42,7 @@ public class Product implements Entity {
 
     @Override
     public PreparedStatement prepareStatement(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.setInt(1, getProductType());
+        preparedStatement.setInt(1, this.getProductType().getId());
         preparedStatement.setString(2, getDescription());
         preparedStatement.setDouble(3, getValue());
         return preparedStatement;
@@ -50,12 +52,7 @@ public class Product implements Entity {
         return id;
     }
 
-    public ProductType getProductype (Connection connection, int productTypeId){
-        ProductTypeDAO dao = new ProductTypeDAO(connection);
-        return dao.getById(productTypeId);
-    }
-
-    public int getProductType() {
+    public ProductType getProductType() {
         return productType;
     }
 
@@ -69,6 +66,10 @@ public class Product implements Entity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
     }
 
     @Override
