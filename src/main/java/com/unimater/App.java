@@ -26,7 +26,7 @@ public class App {
             Connection connection = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/your_db", "root", "sdb162sw"
             );
-            System.out.println("Sevidor rodiando na porca 8080");
+            System.out.println("Sevidor rodiando na porca 8081");
 
             servidor.createContext("/Product", new ProductHandler(connection));
 
